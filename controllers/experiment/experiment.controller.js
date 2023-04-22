@@ -1,10 +1,13 @@
-const Experiment = require('./../../models/experiment/experiment.model');
-
+const Experiment = require("./../../models/experiment/experiment.model");
+const crypto = require("crypto");
 module.exports = {
   async create(req, res) {
     try {
+      const randomBytes = crypto.randomBytes(2);
+      const randomNum = parseInt(randomBytes.toString("hex"), 16);
+
       const {
-        pin,
+        pin = ("0000" + randomNum).slice(-4),
         duration,
         title,
         initialValue,
@@ -24,7 +27,7 @@ module.exports = {
       return res.status(201).json({ experiment });
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ error: 'Error creating experiment' });
+      return res.status(400).json({ error: "Error creating experiment" });
     }
   },
 
@@ -37,7 +40,7 @@ module.exports = {
       return res.json({ experiment });
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ error: 'Error finding experiment' });
+      return res.status(400).json({ error: "Error finding experiment" });
     }
   },
 
@@ -69,7 +72,7 @@ module.exports = {
       return res.json({ experiment });
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ error: 'Error updating experiment' });
+      return res.status(400).json({ error: "Error updating experiment" });
     }
   },
 
@@ -82,7 +85,7 @@ module.exports = {
       return res.status(204).send();
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ error: 'Error deleting experiment' });
+      return res.status(400).json({ error: "Error deleting experiment" });
     }
   },
 
@@ -93,7 +96,7 @@ module.exports = {
       return res.json({ experiments });
     } catch (err) {
       console.log(err);
-      return res.status(400).json({ error: 'Error finding experiments' });
+      return res.status(400).json({ error: "Error finding experiments" });
     }
   },
 };
