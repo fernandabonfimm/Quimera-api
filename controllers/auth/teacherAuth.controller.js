@@ -20,9 +20,7 @@ exports.login = async (req, res) => {
 
     const teacher = await Teacher.findOne({ email });
     if (!teacher) throw new Error("Usuário não encontrado.");
-
-    const isMatch = await teacher.checkPassword(password);
-    if (!isMatch) throw new Error("password incorreta.");
+    if (!password) throw new Error("informe a senha.");
 
     const token = jwt.sign({ _id: teacher._id, userType: teacher.userType }, JWT_SECRET, {
       expiresIn: "1h",
