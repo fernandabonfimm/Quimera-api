@@ -1,5 +1,6 @@
 const Experiment = require("./../../models/experiment/experiment.model");
 const crypto = require("crypto");
+
 module.exports = {
   async create(req, res) {
     try {
@@ -99,4 +100,5 @@ module.exports = {
       return res.status(400).json({ error: "Error finding experiments" });
     }
   },
+
 };

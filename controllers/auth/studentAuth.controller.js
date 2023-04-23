@@ -26,9 +26,9 @@ exports.createStudent = async (req, res) => {
 exports.getStudentByPin = async (req, res) => {
   try {
     const pin = req.params.pin;
-    const student = await Student.findOne({ pin });
-    if (!student) throw new Error("Estudante não encontrado.");
-    res.send(student);
+    const students = await Student.find({ pin });
+    if (!students || students.length === 0) throw new Error("Estudante não encontrado.");
+    res.send(students);
   } catch (err) {
     console.error(err);
     res.status(404).send({ message: "Estudante não encontrado." });
