@@ -5,20 +5,6 @@ const ExperimentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  duration: {
-    hours: {
-      type: Number,
-      required: true,
-    },
-    minutes: {
-      type: Number,
-      required: true,
-    },
-    seconds: {
-      type: Number,
-      required: true,
-    },
-  },
   title: {
     type: String,
     required: true,
