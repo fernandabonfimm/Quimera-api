@@ -9,7 +9,6 @@ module.exports = {
 
       const {
         pin = ("0000" + randomNum).slice(-4),
-        duration,
         title,
         initialValue,
         expectedVariation,
@@ -18,7 +17,6 @@ module.exports = {
 
       const experiment = await Experiment.create({
         pin,
-        duration,
         title,
         initialValue,
         expectedVariation,
@@ -50,7 +48,6 @@ module.exports = {
       const { id } = req.params;
       const {
         pin,
-        duration,
         title,
         initialValue,
         expectedVariation,
@@ -61,7 +58,6 @@ module.exports = {
         id,
         {
           pin,
-          duration,
           title,
           initialValue,
           expectedVariation,
