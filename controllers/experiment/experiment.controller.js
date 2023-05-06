@@ -1,5 +1,6 @@
 const Experiment = require("./../../models/experiment/experiment.model");
 const crypto = require("crypto");
+const excel = require("exceljs");
 
 module.exports = {
   async create(req, res) {
@@ -88,7 +89,7 @@ module.exports = {
 
   async findAll(req, res) {
     try {
-      const experiments = await Experiment.find();
+      const experiments = await this.findAll();
 
       return res.json({ experiments });
     } catch (err) {
@@ -97,4 +98,50 @@ module.exports = {
     }
   },
 
+  async exportExcel(req, res) {
+    try {
+      const experiments = await Experiment.findAll();
+
+      const workbook = new excel.Workbook();
+      const worksheet = workbook.addWorksheet("Experiments");
+
+      worksheet.columns = [
+        { header: "ID", key: "_id", width: 10 },
+        { header: "Pin", key: "pin", width: 10 },
+        { header: "Title", key: "title", width: 32 },
+        { header: "Initial Value", key: "initialValue", width: 15 },
+        { header: "Expected Variation", key: "expectedVariation", width: 20 },
+        {
+          header: "Unattended Variation",
+          key: "unattendedVariation",
+          width: 20,
+        },
+      ];
+
+      experiments.forEach((experiment) => {
+        worksheet.addRow({
+          _id: experiment._id.toString(),
+          pin: experiment.pin.toString(),
+          title: experiment.title.toString(),
+          initialValue: experiment.initialValue.toString(),
+          expectedVariation: experiment.expectedVariation.toString(),
+          unattendedVariation: experiment.unattendedVariation.toString(),
+        });
+      });
+
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      res.setHeader(
+        "Content-Disposition",
+        "attachment; filename=" + "experiments.xlsx"
+      );
+      await workbook.xlsx.write(res);
+      return res.status(200).end();
+    } catch (error) {
+      console.log(error);
+      return res.status(400).json({ error: "Error exporting experiments" });
+    }
+  },
 };
