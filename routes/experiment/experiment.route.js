@@ -15,4 +15,6 @@ routes.put('/experiments/:id', ExperimentController.update);
 
 routes.delete('/experiments/:id', ExperimentController.delete);
 
+routes.get('/experimentsExcel', ExperimentController.exportExcel);
+
 module.exports = routes;

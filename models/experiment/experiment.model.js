@@ -9,18 +9,10 @@ const ExperimentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  initialValue: {
-    type: Number,
+  description:{
+    type: String,
     required: true,
-  },
-  expectedVariation: {
-    type: Number,
-    required: true,
-  },
-  unattendedVariation: {
-    type: Number,
-    required: true,
-  },
+  }
 });
 
 ExperimentSchema.statics.findByPin = async function(pin) {

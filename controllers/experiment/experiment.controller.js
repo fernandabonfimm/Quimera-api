@@ -10,17 +10,13 @@ module.exports = {
       const {
         pin = ("0000" + randomNum).slice(-4),
         title,
-        initialValue,
-        expectedVariation,
-        unattendedVariation,
+        description
       } = req.body;
 
       const experiment = await Experiment.create({
         pin,
         title,
-        initialValue,
-        expectedVariation,
-        unattendedVariation,
+        description
       });
 
       return res.status(201).json({ experiment });
@@ -49,9 +45,7 @@ module.exports = {
       const {
         pin,
         title,
-        initialValue,
-        expectedVariation,
-        unattendedVariation,
+        description
       } = req.body;
 
       const experiment = await Experiment.findByIdAndUpdate(
@@ -59,9 +53,7 @@ module.exports = {
         {
           pin,
           title,
-          initialValue,
-          expectedVariation,
-          unattendedVariation,
+          description
         },
         { new: true }
       );
