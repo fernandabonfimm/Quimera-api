@@ -3,6 +3,10 @@ const ExperimentController = require('./../../controllers/experiment/experiment.
 
 const routes = express.Router();
 
+routes.get('/experiments/getOptions', ExperimentController.getOptions);
+
+routes.get('/experiments/getPhaseOne', ExperimentController.getPhaseOne);
+
 routes.post('/experiments', ExperimentController.create);
 
 routes.get('/experiments/:id', ExperimentController.findById);

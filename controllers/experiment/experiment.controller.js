@@ -97,4 +97,13 @@ module.exports = {
     }
   },
 
+  async getPhaseOne(req, res) {
+    const data = require("./result_tables/0_420");
+    res.json({ data });
+  },
+
+  async getOptions(req, res) {
+    const options = require("./options");
+    res.json({ options });
+  },
 };
