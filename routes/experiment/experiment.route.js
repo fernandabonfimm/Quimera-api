@@ -3,6 +3,8 @@ const ExperimentController = require('./../../controllers/experiment/experiment.
 
 const routes = express.Router();
 
+routes.get('/experiments/getAnswer', ExperimentController.getGrahpic);
+
 routes.get('/experiments/getOptions', ExperimentController.getOptions);
 
 routes.get('/experiments/getPhaseOne', ExperimentController.getPhaseOne);
@@ -15,6 +17,6 @@ routes.put('/experiments/:id', ExperimentController.update);
 
 routes.delete('/experiments/:id', ExperimentController.delete);
 
-routes.get('/experimentsExcel', ExperimentController.exportExcel);
+// routes.get('/experimentsExcel', ExperimentController.exportExcel);
 
 module.exports = routes;
