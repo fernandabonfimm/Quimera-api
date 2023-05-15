@@ -4,5 +4,7 @@ const studentController = require("./../../controllers/auth/studentAuth.controll
 
 router.post("/students", studentController.createStudent);
 router.get("/students/:pin", studentController.getStudentByPin);
+router.post("/students/answer/:id", studentController.updateStudentAnswers);
+router.get('/students/:id', studentController.findById);
 
 module.exports = router;

@@ -1,5 +1,7 @@
 const Experiment = require("./../../models/experiment/experiment.model");
 const crypto = require("crypto");
+const Student = require("@/controllers/auth/studentAuth.controller.js")
+const options = require("./options");
 
 module.exports = {
   async create(req, res) {
@@ -95,7 +97,36 @@ module.exports = {
   },
 
   async getOptions(req, res) {
-    const options = require("./options");
-    res.json({ options });
+    const [ optionsOne, optionsTwo ] = require('./options'); 
+    res.json({ optionsOne, optionsTwo });
+  },
+
+  async getGrahpic(req, resp) {
+    const student = await Student.findById(req.params.id);
+  
+    const [optionsOne, optionsTwo] = require('./options'); 
+    let valueAnswer = 0;
+    
+    for (let option of optionsOne) {
+      if (student.answerOne === option.label) {
+        valueAnswer += option.valueAnswer;
+      }
+    }
+
+    for (let option of optionsTwo) {
+      if (student.answerTwo === option.label) {
+        valueAnswer += option.valueAnswer;
+      }
+    }
+    
+    const initial = require('./result_tables/0_420');
+    const answer = require(`./result_tables/420_1440_${valueAnswer * 100}`);
+    const _correct = require('./result_tables/420_1440_100');
+  
+    resp.json({
+      correct: [...initial.concat(_correct.slice(420))],
+      answerStudent: [...initial.concat(answer.slice(420))]
+    });
   },
 };
+

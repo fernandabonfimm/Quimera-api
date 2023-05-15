@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
 const DATABASECONECTIVITY = process.env.DATABASECONECTIVITY;
 
 async function main() {

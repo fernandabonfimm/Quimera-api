@@ -28,6 +28,4 @@ const optionsTwo = [
     { label: "Hormônio L", value: "L-HB2" ,  },
     { label: "Hormônio M", value: "M-HB2" ,  },
 ];
-module.exports = {
-    options: [ optionsOne, optionsTwo ]
-};
+module.exports = [optionsOne, optionsTwo];
