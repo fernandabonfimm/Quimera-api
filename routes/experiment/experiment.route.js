@@ -5,6 +5,8 @@ const logger = require('@/logger/logger');
 
 const routes = express.Router();
 
+routes.get('/experiments/getAnswer', ExperimentController.getGrahpic);
+
 
 // routes.use('/experiments/', function (req, res, next) {
 //     const authHeader = req.headers['authorization'];
@@ -35,6 +37,8 @@ routes.put('/experiments/:id', ExperimentController.update);
 
 routes.delete('/experiments/:id', ExperimentController.delete);
 
-routes.get('/experiments/graphic/:id', ExperimentController.getGrahpic);
+routes.get('/experiments', ExperimentController.findAll);
+
+// routes.get('/experiments/graphic/:id', ExperimentController.getGrahpic);
 
 module.exports = routes;
