@@ -39,6 +39,6 @@ routes.delete('/experiments/:id', ExperimentController.delete);
 
 routes.get('/experiments', ExperimentController.findAll);
 
-// routes.get('/experiments/graphic/:id', ExperimentController.getGrahpic);
+routes.get('/experiments/graphic/:id', ExperimentController.getGrahpic);
 
 module.exports = routes;

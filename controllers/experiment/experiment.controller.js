@@ -130,31 +130,5 @@ module.exports = {
     });
   },
 
-  async getGrahpic(req, resp) {
-    // const student = StudentModel.findById(req.params.id);
-    const options = require("./options");
-    const student = {
-      answerOne: 'B-HB1',
-      answerTwo: 'I-HB2'
-    };
-    let valueAnswer = 0;
-
-    for (opt of  options.options) {
-      for (_optn of opt) {
-        if (_optn.value == student.answerOne || _optn.value == student.answerTwo) {
-          valueAnswer += _optn.weigth;
-        }
-      }
-    }
-    const initial = require('./result_tables/0_420');
-    const answer = require(`./result_tables/420_1440_${valueAnswer * 100}`);
-    const _correct = require('./result_tables/420_1440_100');
-
-    resp.json({
-      correct: [ ...initial.concat(_correct.slice(420)) ],
-      answerStudent: [ ...initial.concat(answer.slice(420)) ]
-    });
-  },
-
 };
 
