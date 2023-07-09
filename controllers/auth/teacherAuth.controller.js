@@ -25,7 +25,7 @@ exports.login = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.send({ token, name: teacher.name });
+    res.send({ token, name: teacher.name , email: teacher.email, userType: teacher.userType, _id: teacher._id});
   } catch (err) {
     logger.error(err);
     res.status(401).send({ message: "Falha na autenticação." });

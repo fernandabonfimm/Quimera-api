@@ -12,7 +12,20 @@ const ExperimentSchema = new mongoose.Schema({
   description:{
     type: String,
     required: true,
-  }
+  },
+  teacher: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Teacher',
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 ExperimentSchema.statics.findByPin = async function(pin) {
@@ -23,3 +36,4 @@ ExperimentSchema.statics.findByPin = async function(pin) {
 const Experiment = mongoose.model('Experiment', ExperimentSchema);
 
 module.exports = Experiment;
+
